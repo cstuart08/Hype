@@ -22,7 +22,11 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="HYPE-NATION" id="iYE-IE-b2q">
-                                    <barButtonItem key="rightBarButtonItem" systemItem="add" id="LcB-TI-afl"/>
+                                    <barButtonItem key="rightBarButtonItem" systemItem="add" id="LcB-TI-afl">
+                                        <connections>
+                                            <action selector="addButtonTapped:" destination="MRj-QT-JBJ" id="Vho-vD-ce7"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </navigationItem>
                             </items>
                         </navigationBar>

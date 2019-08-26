@@ -14,6 +14,7 @@
 		D47DE5BE231438FF002A4AA7 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47DE5BD231438FF002A4AA7 /* CloudKit.framework */; };
 		D47DE5C52314418B002A4AA7 /* HypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DE5C42314418B002A4AA7 /* HypeTableViewController.swift */; };
 		D47DE5C72314423B002A4AA7 /* Hype.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DE5C62314423B002A4AA7 /* Hype.swift */; };
+		D47DE5C923144A69002A4AA7 /* HypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DE5C823144A69002A4AA7 /* HypeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		D47DE5BD231438FF002A4AA7 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D47DE5C42314418B002A4AA7 /* HypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeTableViewController.swift; sourceTree = "<group>"; };
 		D47DE5C62314423B002A4AA7 /* Hype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hype.swift; sourceTree = "<group>"; };
+		D47DE5C823144A69002A4AA7 /* HypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +63,6 @@
 		D47DE5A8231438B8002A4AA7 /* Hype */ = {
 			isa = PBXGroup;
 			children = (
-				D47DE5AD231438B8002A4AA7 /* Main.storyboard */,
 				D47DE5C3231440BF002A4AA7 /* Storyboards */,
 				D47DE5C2231440B4002A4AA7 /* Models */,
 				D47DE5C1231440A9002A4AA7 /* Model Controllers */,
@@ -102,6 +103,7 @@
 		D47DE5C1231440A9002A4AA7 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D47DE5C823144A69002A4AA7 /* HypeController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -117,6 +119,7 @@
 		D47DE5C3231440BF002A4AA7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				D47DE5AD231438B8002A4AA7 /* Main.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47DE5AA231438B8002A4AA7 /* AppDelegate.swift in Sources */,
+				D47DE5C923144A69002A4AA7 /* HypeController.swift in Sources */,
 				D47DE5C52314418B002A4AA7 /* HypeTableViewController.swift in Sources */,
 				D47DE5C72314423B002A4AA7 /* Hype.swift in Sources */,
 			);
