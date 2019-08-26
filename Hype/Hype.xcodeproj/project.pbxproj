@@ -12,6 +12,8 @@
 		D47DE5B1231438B9002A4AA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47DE5B0231438B9002A4AA7 /* Assets.xcassets */; };
 		D47DE5B4231438B9002A4AA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D47DE5B2231438B9002A4AA7 /* LaunchScreen.storyboard */; };
 		D47DE5BE231438FF002A4AA7 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47DE5BD231438FF002A4AA7 /* CloudKit.framework */; };
+		D47DE5C52314418B002A4AA7 /* HypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DE5C42314418B002A4AA7 /* HypeTableViewController.swift */; };
+		D47DE5C72314423B002A4AA7 /* Hype.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DE5C62314423B002A4AA7 /* Hype.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		D47DE5B5231438B9002A4AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D47DE5BB231438FB002A4AA7 /* Hype.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hype.entitlements; sourceTree = "<group>"; };
 		D47DE5BD231438FF002A4AA7 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		D47DE5C42314418B002A4AA7 /* HypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeTableViewController.swift; sourceTree = "<group>"; };
+		D47DE5C62314423B002A4AA7 /* Hype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hype.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 		D47DE5C0231440A1002A4AA7 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D47DE5C42314418B002A4AA7 /* HypeTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -104,6 +109,7 @@
 		D47DE5C2231440B4002A4AA7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D47DE5C62314423B002A4AA7 /* Hype.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -195,6 +201,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47DE5AA231438B8002A4AA7 /* AppDelegate.swift in Sources */,
+				D47DE5C52314418B002A4AA7 /* HypeTableViewController.swift in Sources */,
+				D47DE5C72314423B002A4AA7 /* Hype.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +351,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hype/Hype.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KMTDCPCY5V;
-				INFOPLIST_FILE = Hype/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Hype/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -362,7 +370,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hype/Hype.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KMTDCPCY5V;
-				INFOPLIST_FILE = Hype/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Hype/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
