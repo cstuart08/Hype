@@ -58,6 +58,28 @@ class HypeController {
 
     }
     // Update
-    // Delete
     
+        // Subrscription
+    func subscribeToHypes() {
+        
+        let predicate = NSPredicate(value: true)
+        
+        let subscription = CKQuerySubscription(recordType: Constants.recordTypeKey, predicate: predicate, options: .firesOnRecordCreation)
+        
+        let notificationInfo = CKSubscription.NotificationInfo()
+        notificationInfo.title = "HYPE!"
+        notificationInfo.alertBody = "There's a new Hype!"
+        notificationInfo.soundName = "default"
+        
+        subscription.notificationInfo = notificationInfo
+        
+        publicDB.save(subscription) { (_, error) in
+            if let error = error {
+                print("There was an error with the subscription. \(error.localizedDescription)")
+                return
+            }
+            print("success")
+        }
+    }
+    // Delete
 }
