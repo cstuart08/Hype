@@ -16,8 +16,9 @@ struct Constants {
 }
 
 class Hype {
-    let hypeText: String
-    let timestamp: Date
+    var hypeText: String
+    var timestamp: Date
+    var ckRecordID: CKRecord.ID?
     
     init(hypeText: String, timestamp: Date = Date()) {
         self.hypeText = hypeText
@@ -28,9 +29,10 @@ class Hype {
 extension CKRecord {
     // Create a CKRecord from a Hype object.
     convenience init(hype: Hype) {
-        self.init(recordType: Constants.recordTypeKey)
+        self.init(recordType: Constants.recordTypeKey, recordID: hype.ckRecordID ?? CKRecord.ID(recordName: UUID().uuidString))
         self.setValue(hype.hypeText, forKey: Constants.recordTextKey)
         self.setValue(hype.timestamp, forKey: Constants.recordTimestampKey)
+        hype.ckRecordID = recordID
     }
 }
 
@@ -40,5 +42,12 @@ extension Hype {
         guard let hypeText = ckRecord[Constants.recordTextKey] as? String,
             let timestamp = ckRecord[Constants.recordTimestampKey] as? Date else { return nil }
         self.init(hypeText: hypeText, timestamp: timestamp)
+        ckRecordID = ckRecord.recordID
+    }
+}
+
+extension Hype: Equatable {
+    static func == (lhs: Hype, rhs: Hype) -> Bool {
+        return lhs.hypeText == rhs.hypeText && lhs.timestamp == rhs.timestamp && lhs.ckRecordID == rhs.ckRecordID
     }
 }

@@ -15,6 +15,7 @@
 		D47DE5C52314418B002A4AA7 /* HypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DE5C42314418B002A4AA7 /* HypeTableViewController.swift */; };
 		D47DE5C72314423B002A4AA7 /* Hype.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DE5C62314423B002A4AA7 /* Hype.swift */; };
 		D47DE5C923144A69002A4AA7 /* HypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DE5C823144A69002A4AA7 /* HypeController.swift */; };
+		D4BA99222315A9C6004CDAC8 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BA99212315A9C6004CDAC8 /* DateHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		D47DE5C42314418B002A4AA7 /* HypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeTableViewController.swift; sourceTree = "<group>"; };
 		D47DE5C62314423B002A4AA7 /* Hype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hype.swift; sourceTree = "<group>"; };
 		D47DE5C823144A69002A4AA7 /* HypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeController.swift; sourceTree = "<group>"; };
+		D4BA99212315A9C6004CDAC8 /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		D47DE5A8231438B8002A4AA7 /* Hype */ = {
 			isa = PBXGroup;
 			children = (
+				D4BA991F2315A9A6004CDAC8 /* Helpers */,
 				D47DE5C3231440BF002A4AA7 /* Storyboards */,
 				D47DE5C2231440B4002A4AA7 /* Models */,
 				D47DE5C1231440A9002A4AA7 /* Model Controllers */,
@@ -124,6 +127,22 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		D4BA991F2315A9A6004CDAC8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D4BA99202315A9B2004CDAC8 /* Date Helpers */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D4BA99202315A9B2004CDAC8 /* Date Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D4BA99212315A9C6004CDAC8 /* DateHelpers.swift */,
+			);
+			path = "Date Helpers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,6 +176,9 @@
 					D47DE5A5231438B8002A4AA7 = {
 						CreatedOnToolsVersion = 10.3;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -206,6 +228,7 @@
 				D47DE5AA231438B8002A4AA7 /* AppDelegate.swift in Sources */,
 				D47DE5C923144A69002A4AA7 /* HypeController.swift in Sources */,
 				D47DE5C52314418B002A4AA7 /* HypeTableViewController.swift in Sources */,
+				D4BA99222315A9C6004CDAC8 /* DateHelpers.swift in Sources */,
 				D47DE5C72314423B002A4AA7 /* Hype.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

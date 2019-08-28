@@ -25,6 +25,9 @@ class HypeController {
         
         let hype = Hype(hypeText: text)
         let hypeRecord = CKRecord(hype: hype)
+        
+        self.hypes.insert(hype, at: 0)
+        
         publicDB.save(hypeRecord) { (_, error) in
             if let error = error {
                 print("There was an error saving the Hype: \(error.localizedDescription)")
@@ -32,7 +35,6 @@ class HypeController {
                 return
             }
         }
-        hypes.append(hype)
         completion(true)
     }
     // Read
@@ -42,6 +44,9 @@ class HypeController {
         let predicate = NSPredicate(value: true)
         
         let query = CKQuery(recordType: Constants.recordTypeKey, predicate: predicate)
+        
+        let sortDescriptors = NSSortDescriptor(key: Constants.recordTimestampKey, ascending: false)
+        query.sortDescriptors = [sortDescriptors]
         
         publicDB.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
@@ -59,16 +64,36 @@ class HypeController {
     }
     // Update
     
+    func updateHype(hype: Hype, newText: String, completion: @escaping (Bool) -> Void) {
+        hype.hypeText = newText
+        hype.timestamp = Date()
+        
+        let modificationOp = CKModifyRecordsOperation(recordsToSave: [CKRecord(hype: hype)], recordIDsToDelete: nil)
+        modificationOp.savePolicy = .changedKeys
+        modificationOp.queuePriority = .veryHigh
+        modificationOp.qualityOfService = .userInteractive
+        modificationOp.modifyRecordsCompletionBlock = { (_, _, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+        self.publicDB.add(modificationOp)
+    }
+    
         // Subrscription
-    func subscribeToHypes() {
+    func subscribeToHypes(completion: @escaping (Error?) -> Void) {
         
         let predicate = NSPredicate(value: true)
         
-        let subscription = CKQuerySubscription(recordType: Constants.recordTypeKey, predicate: predicate, options: .firesOnRecordCreation)
+        let subscription = CKQuerySubscription(recordType: Constants.recordTypeKey, predicate: predicate, options: [.firesOnRecordCreation, .firesOnRecordUpdate])
         
         let notificationInfo = CKSubscription.NotificationInfo()
         notificationInfo.title = "HYPE!"
         notificationInfo.alertBody = "There's a new Hype!"
+        notificationInfo.shouldBadge = true
         notificationInfo.soundName = "default"
         
         subscription.notificationInfo = notificationInfo
@@ -78,8 +103,24 @@ class HypeController {
                 print("There was an error with the subscription. \(error.localizedDescription)")
                 return
             }
-            print("success")
         }
     }
     // Delete
+    
+    func remove(hype: Hype, completion: @escaping (Bool) -> Void) {
+        
+        guard let hypeRecordID = hype.ckRecordID else { return }
+        
+        guard let index = self.hypes.firstIndex(of: hype) else { return }
+        self.hypes.remove(at: index)
+        
+        publicDB.delete(withRecordID: hypeRecordID) { (recordID, error) in
+            if let error = error {
+                print("Error removing Hype. Error: \(#function)\(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
 }

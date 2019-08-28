@@ -13,6 +13,25 @@ class HypeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        configureRefreshControl()
+    }
+    
+    func configureRefreshControl () {
+        // Add the refresh control to your UIScrollView object.
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action:
+            #selector(handleRefreshControl),
+                                                  for: .valueChanged)
+    }
+
+    @objc func handleRefreshControl() {
+        // Update your content…
+
+        // Dismiss the refresh control.
+        self.loadData()
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
     
     func loadData() {
@@ -25,7 +44,7 @@ class HypeTableViewController: UITableViewController {
         }
     }
     
-    func presentAddHypeAlert() {
+    func presentAddHypeAlert(updatedHype: Hype?) {
         let alertController = UIAlertController(title: "Get Hype", message: "What is hype may never die!", preferredStyle: .alert)
         
         alertController.addTextField { (textField) in
@@ -35,8 +54,17 @@ class HypeTableViewController: UITableViewController {
         // ADD ACTION
         let addHypeAction = UIAlertAction(title: "Add Hype", style: .default) { (_) in
             guard let hypeText = alertController.textFields?.first?.text else { return }
-            if hypeText != "" {
+            if hypeText != "" && updatedHype == nil {
                 HypeController.sharedInstance.saveHype(text: hypeText, completion: { (success) in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }
+                })
+            } else {
+                guard let hype = updatedHype else { return }
+                HypeController.sharedInstance.updateHype(hype: hype, newText: hypeText, completion: { (success) in
                     if success {
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
@@ -55,7 +83,7 @@ class HypeTableViewController: UITableViewController {
     }
 
     @IBAction func addButtonTapped(_ sender: Any) {
-            presentAddHypeAlert()
+        presentAddHypeAlert(updatedHype: nil)
     }
     
     // MARK: - Table view data source
@@ -69,10 +97,33 @@ class HypeTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hypeCell", for: indexPath)
         let hype = HypeController.sharedInstance.hypes[indexPath.row]
         
+//        let dateForm = DateFormatter()
+//        dateForm.dateStyle = .medium
+//        dateForm.timeStyle = .medium
+//        let date = dateForm.string(from: hype.timestamp)
+        let dateSTR = DateHelper.shared.mediumStringForDateAndTime(date: hype.timestamp)
+        
         cell.textLabel?.text = hype.hypeText
-        cell.detailTextLabel?.text = "\(hype.timestamp)"
+        cell.detailTextLabel?.text = dateSTR
         
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let hype = HypeController.sharedInstance.hypes[indexPath.row]
+        presentAddHypeAlert(updatedHype: hype)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let hype = HypeController.sharedInstance.hypes[indexPath.row]
+            HypeController.sharedInstance.remove(hype: hype) { (success) in
+                if success {
+                    DispatchQueue.main.async {
+                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            }
+        }
+    }
 }
